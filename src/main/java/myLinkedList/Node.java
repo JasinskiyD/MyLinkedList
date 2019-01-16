@@ -1,26 +1,26 @@
 package myLinkedList;
 
-public class Node<T> {
-    private T value;
+class Node {
+    private String value;
     private Node next;
 
-    public Node(T value){
+     Node(String value){
         this.value = value;
     }
 
-    public T getValue() {
+     String getValue() {
         return value;
     }
 
-    public void setValue(T value) {
+    void setValue(String value) {
         this.value = value;
     }
 
-    public Node getNext() {
+     Node getNext() {
         return next;
     }
 
-    public void setNext(Node next) {
+     void setNext(Node next) {
         this.next = next;
     }
 }

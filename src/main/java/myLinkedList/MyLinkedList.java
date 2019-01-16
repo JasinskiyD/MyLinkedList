@@ -1,13 +1,14 @@
 package myLinkedList;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class MyLinkedList<T> {
+import java.util.Arrays;
+
+
+public class MyLinkedList {
     private Node head;
     private int size;
 
-    public void add(T value){
+    public void add(String value){
         if(head == null){
             this.head = new Node(value);
         } else {
@@ -22,17 +23,18 @@ public class MyLinkedList<T> {
 
     @Override
     public String toString(){
-        List result = new ArrayList();
+       String[] result = new String[size];
         int index = 0;
         Node temp = head;
 
         while (temp != null){
-            result.add(index, temp.getValue());
-            index++;
+            result[index++] = temp.getValue();
             temp = temp.getNext();
         }
-        return result.toString();
+        return Arrays.toString(result);
     }
+
+
 
 
 
