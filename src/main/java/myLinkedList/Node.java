@@ -1,14 +1,15 @@
 package myLinkedList;
 
+
 class Node {
     private String value;
     private Node next;
 
-     Node(String value){
+    Node(String value) {
         this.value = value;
     }
 
-     String getValue() {
+    String getValue() {
         return value;
     }
 
@@ -16,11 +17,12 @@ class Node {
         this.value = value;
     }
 
-     Node getNext() {
+    Node getNext() {
         return next;
     }
 
-     void setNext(Node next) {
+    void setNext(Node next) {
         this.next = next;
     }
+
 }
