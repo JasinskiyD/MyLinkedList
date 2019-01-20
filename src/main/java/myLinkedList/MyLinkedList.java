@@ -50,7 +50,6 @@ public class MyLinkedList {
         Node temp = head;
         Node currentValue;
 
-
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
@@ -71,7 +70,6 @@ public class MyLinkedList {
                 currentIndex++;
             }
         }
-
     }
 
     public void remove(int index) {
