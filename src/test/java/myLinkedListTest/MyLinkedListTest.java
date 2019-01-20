@@ -40,11 +40,9 @@ public class MyLinkedListTest {
         list.add(WORD);
         list.add("test");
         list.add("some");
-        list.set(1, WORD_2);
+        list.set(0, WORD_2);
 
-        //assertEquals(WORD_2, list.get(0));
         assertEquals(3, list.size());
-        System.out.println(list);
     }
 
     @Test

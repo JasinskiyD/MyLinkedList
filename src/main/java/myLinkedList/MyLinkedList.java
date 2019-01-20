@@ -45,13 +45,13 @@ public class MyLinkedList {
         throw new IllegalArgumentException();
     }
 
-    public void set(int index, String value){
+    public void set(int index, String value) {
         int currentIndex = 0;
         Node temp = head;
         Node currentValue;
 
 
-        if (index < 0 || index >= size){
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
 
