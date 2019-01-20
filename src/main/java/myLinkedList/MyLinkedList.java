@@ -45,20 +45,26 @@ public class MyLinkedList {
         throw new IllegalArgumentException();
     }
 
-  /*  public void set(int index, String value){
+    public void set(int index, String value){
         int currentIndex = 0;
         Node temp = head;
-        Node next;
+        Node currentValue;
+
 
         if (index < 0 || index >= size){
             throw new IndexOutOfBoundsException();
         }
 
+        if (index == 0) {
+            temp.setValue(value);
+            return;
+        }
+
         while (temp != null) {
-            if (currentIndex == index) {
-                next = temp.getNext();
-                temp = new Node(value);
-                temp.setNext(next);
+            if ((currentIndex + 1) == index) {
+                currentValue = new Node(value);
+                currentValue.setNext(temp.getNext().getNext());
+                temp.setNext(currentValue);
                 return;
             } else {
                 temp = temp.getNext();
@@ -66,7 +72,7 @@ public class MyLinkedList {
             }
         }
 
-    }*/
+    }
 
     public void remove(int index) {
         if (isEmpty()) {
