@@ -49,7 +49,8 @@ public class MyLinkedListTest {
     public void testDeleteElement(){
         MyLinkedList list = new MyLinkedList();
         list.add(WORD);
-        assertFalse(list.isEmpty());
+        list.remove(0);
+        assertTrue(list.isEmpty());
     }
 
 }
