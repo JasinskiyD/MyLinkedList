@@ -43,6 +43,7 @@ public class MyLinkedListTest {
         list.set(0, WORD_2);
 
         assertEquals(3, list.size());
+        assertEquals(WORD_2, list.get(0));
     }
 
     @Test
