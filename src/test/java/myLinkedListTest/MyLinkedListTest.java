@@ -1,6 +1,6 @@
 package myLinkedListTest;
 
-import myLinkedList.MyLinkedList;
+import mylinkedlist.MyLinkedList;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
