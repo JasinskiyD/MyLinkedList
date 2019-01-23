@@ -4,14 +4,17 @@ public class MyLinkedList {
     private Node head;
     private int size;
 
+    // return size of the list
     public int size() {
         return size;
     }
 
+    // check if list is empty and returns status (true if empty and false if not)
     public boolean isEmpty() {
         return size == 0;
     }
 
+    // returns last list element
     private Node getLastNode() {
         Node temp = head;
         while (temp.getNext() != null) {
@@ -20,22 +23,31 @@ public class MyLinkedList {
         return temp;
     }
 
+    // removes all of the elements from list
+    public void clear() {
+        head = null;
+        size = 0;
+    }
+
+    // checks the parameter that method accepts (parameter is the number of the element in the list), returns true if range acceptable and false if not
     private boolean indexInRange(int index) {
         return 0 <= index && index < size;
     }
 
+    // add new element in the end of list, if element is not acceptable return - false, if element added return - true
     public boolean add(String element) {
-        if (element == null) {
-            return false;
+        if (element == null) {  // if element is invalid
+            return false;   // method return false
         }
-        if (head == null) {
-            this.head = new Node(element);
-        } else {
-            getLastNode().setNext(new Node(element));
+        if (head == null) {  // if first element in list is null
+            this.head = new Node(element); // update first element in list with new parameter
+        } else {    // if first element in list is valid value
+            getLastNode().setNext(new Node(element)); // update last element in list with new parameter
         }
-        size++;
+        size++; // update size of the list
         return true;
     }
+
 
     public String get(int index) {
         if (indexInRange(index)) {
@@ -78,6 +90,7 @@ public class MyLinkedList {
         }
     }
 
+
     public void remove(int index) {
         if (indexInRange(index)) {
             if (isEmpty()) {
@@ -86,9 +99,6 @@ public class MyLinkedList {
             int currentIndex = 0;
             Node temp = head;
 
-            if (index < 0 || index >= size) {
-                throw new IndexOutOfBoundsException();
-            }
             if (index == 0) {
                 head = head.getNext();
                 size--;
@@ -108,6 +118,7 @@ public class MyLinkedList {
         }
     }
 
+    // returns all elements of list in String format
     @Override
     public String toString() {
         StringBuilder string = new StringBuilder();

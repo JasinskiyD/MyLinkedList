@@ -54,4 +54,15 @@ public class MyLinkedListTest {
         assertTrue(list.isEmpty());
     }
 
+    @Test
+    public void testClearList(){
+        MyLinkedList list = new MyLinkedList();
+        list.add(WORD);
+        list.add(WORD_2);
+        list.clear();
+
+        assertEquals(0, list.size());
+        assertTrue(list.isEmpty());
+    }
+
 }
