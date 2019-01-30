@@ -1,3 +1,4 @@
+
 package myLinkedListTest;
 
 import mylinkedlist.MyLinkedList;
@@ -68,3 +69,4 @@ public class MyLinkedListTest {
         assertNull(list.get(0));
     }
 }
+
