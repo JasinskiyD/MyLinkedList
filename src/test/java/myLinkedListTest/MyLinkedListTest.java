@@ -30,8 +30,10 @@ public class MyLinkedListTest {
     public void testReadElement(){
         MyLinkedList list = new MyLinkedList();
         list.add(WORD);
+        list.add(WORD_2);
 
         assertEquals(WORD, list.get(0));
+        assertEquals(WORD_2, list.get(1));
     }
 
     @Test
@@ -63,6 +65,7 @@ public class MyLinkedListTest {
 
         assertEquals(0, list.size());
         assertTrue(list.isEmpty());
+        assertNull(list.get(0));
     }
 
 }

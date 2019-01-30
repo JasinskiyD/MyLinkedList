@@ -1,4 +1,4 @@
-package myLinkedList;
+package mylinkedlist;
 
 
 class Node {
