@@ -69,10 +69,7 @@ public class MyLinkedList {
     }
 
     public void set(int index, String element) {
-        Node newNode = getNode(index);
-        Node nextNode = getNode(index + 1);
-        newNode.setValue(element);
-        newNode.setNext(nextNode);
+        getNode(index).setValue(element).setNext(getNode(index + 1));
     }
 
     public void remove(int index) {

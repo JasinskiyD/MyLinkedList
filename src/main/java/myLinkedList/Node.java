@@ -13,8 +13,9 @@ class Node {
         return value;
     }
 
-    void setValue(String value) {
+    Node setValue(String value) {
         this.value = value;
+        return this;
     }
 
     Node getNext() {
