@@ -21,7 +21,7 @@ public class MyLinkedList {
 
     // checks the parameter that method accepts (parameter is the number of the element in the list), returns true if range acceptable and false if not
     private boolean indexInRange(int index) {
-        return index >=0 && index < size;
+        return index >= 0 && index < size;
     }
 
     // add new element in the end of list, if element is not acceptable return - false, if element added return - true
@@ -69,55 +69,26 @@ public class MyLinkedList {
     }
 
     public void set(int index, String element) {
-        if (!indexInRange(index)) {
-            return;
-        }
-        int currentIndex = 0;
-        Node temp = head;
-        Node newNode;
-
-        if (index == 0) {
-            temp.setValue(element);
-            return;
-        }
-
-        while (temp != null) {
-            if ((currentIndex + 1) == index) {
-                newNode = new Node(element);
-                newNode.setNext(temp.getNext().getNext());
-                temp.setNext(newNode);
-                return;
-            } else {
-                temp = temp.getNext();
-                currentIndex++;
-            }
-        }
+        Node newNode = getNode(index);
+        Node nextNode = getNode(index + 1);
+        newNode.setValue(element);
+        newNode.setNext(nextNode);
     }
 
     public void remove(int index) {
         if (!indexInRange(index)) {
             return;
         }
-        int currentIndex = 0;
         Node temp = head;
-
         if (index == 0) {
             head = head.getNext();
             size--;
             return;
         }
-
-        while (temp != null) {
-            if ((currentIndex + 1) == index) {
-                temp.setNext(temp.getNext().getNext());
-                size--;
-                return;
-            } else {
-                temp = temp.getNext();
-                currentIndex++;
-            }
-        }
+        getNode(index).setNext(temp.getNext().getNext());
+        size--;
     }
+
 
     @Override
     public String toString() {
