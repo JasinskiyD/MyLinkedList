@@ -40,12 +40,14 @@ public class MyLinkedListTest {
     @Test
     public void testUpdateElement(){
         MyLinkedList list = new MyLinkedList();
-        list.add(WORD);
+        list.add("new");
         list.add("test");
         list.add("some");
         list.set(0, WORD_2);
+        list.set(1, WORD);
 
         assertEquals(3, list.size());
+        assertEquals(WORD, list.get(1));
         assertEquals(WORD_2, list.get(0));
     }
 
