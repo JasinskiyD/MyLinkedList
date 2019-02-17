@@ -1,5 +1,9 @@
 package mylinkedlist;
 
+import org.apache.commons.text.TextStringBuilder;
+
+import java.util.ArrayList;
+
 import static java.io.File.separator;
 
 public class MyLinkedList {
@@ -20,8 +24,8 @@ public class MyLinkedList {
     }
 
     // checks the parameter that method accepts (parameter is the number of the element in the list), returns true if range acceptable and false if not
-    private boolean indexInRange(int index) {
-        return index >= 0 && index < size;
+    private boolean isIndexInRange(int index) {
+        return 0 <= index && index < size;
     }
 
     // add new element in the end of list, if element is not acceptable return - false, if element added return - true
@@ -44,7 +48,7 @@ public class MyLinkedList {
     }
 
     private Node getNode(int index) {
-        if (!indexInRange(index)) {
+        if (!isIndexInRange(index)) {
             return null;
         }
         int currentIndex = 0;
@@ -62,7 +66,7 @@ public class MyLinkedList {
     }
 
     public String get(int index) {
-        if (!indexInRange(index) || isEmpty()) {
+        if (!isIndexInRange(index) || isEmpty()) {
             return null;
         }
         return getNode(index).getValue();
@@ -73,7 +77,7 @@ public class MyLinkedList {
     }
 
     public void remove(int index) {
-        if (!indexInRange(index)) {
+        if (!isIndexInRange(index)) {
             return;
         }
         Node temp = head;
@@ -86,19 +90,50 @@ public class MyLinkedList {
         size--;
     }
 
-
     @Override
     public String toString() {
-        StringBuilder string = new StringBuilder();
+        TextStringBuilder string = new TextStringBuilder();
         Node temp = head;
 
         while (temp != null) {
-            string.append(temp.getValue()).append(separator);
+            string.append(temp.getValue()).appendSeparator(separator);
             temp = temp.getNext();
         }
 
         return string.toString();
     }
 
+    private ArrayList indexList(String element){
+        ArrayList<Integer> result = new ArrayList<>();
 
+        int count = 0;
+
+        Node temp = head;
+
+        //if list is empty add -1 to array list
+        if (isEmpty()){
+            result.add(-1);
+            return result;
+        }
+
+        //check every list element
+        for (int i = 0; i < size(); i++) {
+            //if element match element in list - add index of element to array list
+            if (element.equals(temp.getValue())) {
+                result.add(count);
+            }
+            //switch to next element in list
+            count++;
+            temp = temp.getNext();
+        }
+        return result;
+    }
+
+    public int indexOf(String element) {
+      return (int) indexList(element).get(0);
+    }
+
+    public int lastIndexOf (String element) {
+        return (int) indexList(element).get(size-1);
+    }
 }

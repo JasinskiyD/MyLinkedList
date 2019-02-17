@@ -11,7 +11,7 @@ public class MyLinkedListTest {
     private static final String WORD_2 = "word_2";
 
     @Test
-    public void testDefaultConstructor(){
+    public void testDefaultConstructor() {
         MyLinkedList list = new MyLinkedList();
 
         assertEquals(0, list.size());
@@ -19,7 +19,7 @@ public class MyLinkedListTest {
     }
 
     @Test
-    public void testAddElement(){
+    public void testAddElement() {
         MyLinkedList list = new MyLinkedList();
 
         assertTrue(list.add(WORD));
@@ -28,7 +28,7 @@ public class MyLinkedListTest {
     }
 
     @Test
-    public void testReadElement(){
+    public void testReadElement() {
         MyLinkedList list = new MyLinkedList();
         list.add(WORD);
         list.add(WORD_2);
@@ -38,7 +38,7 @@ public class MyLinkedListTest {
     }
 
     @Test
-    public void testUpdateElement(){
+    public void testUpdateElement() {
         MyLinkedList list = new MyLinkedList();
         list.add("new");
         list.add("test");
@@ -52,7 +52,7 @@ public class MyLinkedListTest {
     }
 
     @Test
-    public void testDeleteElement(){
+    public void testDeleteElement() {
         MyLinkedList list = new MyLinkedList();
         list.add(WORD);
         list.remove(0);
@@ -60,7 +60,7 @@ public class MyLinkedListTest {
     }
 
     @Test
-    public void testClearList(){
+    public void testClearList() {
         MyLinkedList list = new MyLinkedList();
         list.add(WORD);
         list.add(WORD_2);
@@ -69,6 +69,28 @@ public class MyLinkedListTest {
         assertEquals(0, list.size());
         assertTrue(list.isEmpty());
         assertNull(list.get(0));
+        assertEquals(-1, list.indexOf(WORD_2));
+    }
+
+    @Test
+    public void testGetIndexOfElement(){
+        MyLinkedList list = new MyLinkedList();
+        list.add(WORD);
+        list.add(WORD_2);
+        list.add(WORD);
+        list.add(WORD_2);
+
+        assertEquals(0, list.indexOf(WORD));
+        assertEquals(1, list.indexOf(WORD_2));
+    }
+
+    @Test
+    public void testGetLastIndexOfElement(){
+        MyLinkedList list = new MyLinkedList();
+        list.add(WORD);
+        list.add(WORD);
+
+        assertEquals(1, list.lastIndexOf(WORD));
     }
 }
 
