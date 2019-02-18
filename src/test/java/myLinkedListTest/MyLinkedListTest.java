@@ -70,6 +70,7 @@ public class MyLinkedListTest {
         assertTrue(list.isEmpty());
         assertNull(list.get(0));
         assertEquals(-1, list.indexOf(WORD_2));
+        assertEquals(-1, list.lastIndexOf(WORD));
     }
 
     @Test

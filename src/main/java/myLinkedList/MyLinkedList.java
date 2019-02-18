@@ -106,14 +106,7 @@ public class MyLinkedList {
     private ArrayList<Integer> indexList(String element) {
         ArrayList<Integer> result = new ArrayList<>();
 
-
         Node temp = head;
-
-        //if list is empty add -1 to array list
-        if (isEmpty()) {
-            result.add(-1);
-            return result;
-        }
 
         //check every list element
         for (int count = 0; count < size(); count++) {
@@ -124,6 +117,11 @@ public class MyLinkedList {
             //switch to next element in list
             temp = temp.getNext();
         }
+
+        //if list is empty add -1 to array list
+        if (result.isEmpty()){
+            result.add(-1);
+        }
         return result;
     }
 
@@ -132,6 +130,11 @@ public class MyLinkedList {
     }
 
     public int lastIndexOf(String element) {
-        return indexList(element).get(size - 1);
+        ArrayList<Integer> result = indexList(element);
+        if (result.size() == 1){
+            return result.get(0);
+        } else {
+            return result.get(size-1);
+        }
     }
 }
