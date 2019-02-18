@@ -99,6 +99,7 @@ public class MyLinkedListTest {
         list.add(WORD);
         list.add(WORD);
 
+        assertEquals(-1, list.indexOf(WORD_2));
         assertEquals(-1, list.lastIndexOf(WORD_2));
     }
 }
