@@ -92,5 +92,14 @@ public class MyLinkedListTest {
 
         assertEquals(1, list.lastIndexOf(WORD));
     }
+
+    @Test
+    public void testIndexOfElementIfElementIsAbsent(){
+        MyLinkedList list = new MyLinkedList();
+        list.add(WORD);
+        list.add(WORD);
+
+        assertEquals(-1, list.lastIndexOf(WORD_2));
+    }
 }
 

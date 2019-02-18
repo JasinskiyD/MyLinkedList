@@ -96,44 +96,42 @@ public class MyLinkedList {
         Node temp = head;
 
         while (temp != null) {
-            string.append(temp.getValue()).appendSeparator(separator);
+            string.appendSeparator(separator).append(temp.getValue());
             temp = temp.getNext();
         }
 
         return string.toString();
     }
 
-    private ArrayList indexList(String element){
+    private ArrayList<Integer> indexList(String element) {
         ArrayList<Integer> result = new ArrayList<>();
 
-        int count = 0;
 
         Node temp = head;
 
         //if list is empty add -1 to array list
-        if (isEmpty()){
+        if (isEmpty()) {
             result.add(-1);
             return result;
         }
 
         //check every list element
-        for (int i = 0; i < size(); i++) {
+        for (int count = 0; count < size(); count++) {
             //if element match element in list - add index of element to array list
             if (element.equals(temp.getValue())) {
                 result.add(count);
             }
             //switch to next element in list
-            count++;
             temp = temp.getNext();
         }
         return result;
     }
 
     public int indexOf(String element) {
-      return (int) indexList(element).get(0);
+        return indexList(element).get(0);
     }
 
-    public int lastIndexOf (String element) {
-        return (int) indexList(element).get(size-1);
+    public int lastIndexOf(String element) {
+        return indexList(element).get(size - 1);
     }
 }
