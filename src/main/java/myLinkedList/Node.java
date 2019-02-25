@@ -1,7 +1,7 @@
 package mylinkedlist;
 
 
-class Node {
+class Node extends MyLinkedList {
     private String value;
     private Node next;
 
