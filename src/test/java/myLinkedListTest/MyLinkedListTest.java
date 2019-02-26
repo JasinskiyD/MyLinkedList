@@ -103,5 +103,15 @@ public class MyLinkedListTest {
         assertEquals(-1, list.indexOf(WORD_2));
         assertEquals(-1, list.lastIndexOf(WORD_2));
     }
+
+    @Test
+    public void testToStringSeparator(){
+        MyLinkedList list = new MyLinkedList();
+        list.add(WORD);
+        list.add(WORD);
+
+        String result = list.toString();
+        assertTrue(result.endsWith("d"));
+    }
 }
 
