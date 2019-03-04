@@ -3,6 +3,7 @@ package mylinkedlist;
 import org.apache.commons.text.TextStringBuilder;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import static java.io.File.separator;
 
@@ -119,7 +120,7 @@ public class MyLinkedList {
         }
 
         //if list is empty add -1 to array list
-        if (result.isEmpty()){
+        if (result.isEmpty()) {
             result.add(-1);
         }
         return result;
@@ -131,10 +132,29 @@ public class MyLinkedList {
 
     public int lastIndexOf(String element) {
         ArrayList<Integer> result = indexList(element);
-        if (result.size() == 1){
+        if (result.size() == 1) {
             return result.get(0);
         } else {
-            return result.get(size-1);
+            return result.get(size - 1);
+        }
+    }
+
+    private class Iterator {
+
+        public Iterator(Node list) {
+            head = list;
+        }
+
+        boolean hasNext() {
+            return head.getNext() != null;
+        }
+
+        String next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            } else {
+                return head.getNext().getValue();
+            }
         }
     }
 }
