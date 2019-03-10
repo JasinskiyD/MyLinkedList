@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 
 import static java.io.File.separator;
 
-public class MyLinkedList {
+public class MyLinkedList<T> implements Iterable<T> {
     private Node head;
     private int size;
 
@@ -30,7 +30,7 @@ public class MyLinkedList {
     }
 
     // add new element in the end of list, if element is not acceptable return - false, if element added return - true
-    public boolean add(String element) {
+    public boolean add(T element) {
         // if element is invalid return false
         if (element == null) {
             return false;
@@ -66,14 +66,14 @@ public class MyLinkedList {
         return temp;
     }
 
-    public String get(int index) {
+    public T get(int index) {
         if (!isIndexInRange(index) || isEmpty()) {
             return null;
         }
-        return getNode(index).getValue();
+        return (T) getNode(index).getValue();
     }
 
-    public void set(int index, String element) {
+    public void set(int index, T element) {
         getNode(index).setValue(element).setNext(getNode(index + 1));
     }
 
@@ -104,7 +104,7 @@ public class MyLinkedList {
         return string.toString();
     }
 
-    private ArrayList<Integer> indexList(String element) {
+    private ArrayList<Integer> indexList(T element) {
         ArrayList<Integer> result = new ArrayList<>();
 
         Node temp = head;
@@ -126,11 +126,11 @@ public class MyLinkedList {
         return result;
     }
 
-    public int indexOf(String element) {
+    public int indexOf(T element) {
         return indexList(element).get(0);
     }
 
-    public int lastIndexOf(String element) {
+    public int lastIndexOf(T element) {
         ArrayList<Integer> result = indexList(element);
         if (result.size() == 1) {
             return result.get(0);
@@ -139,22 +139,33 @@ public class MyLinkedList {
         }
     }
 
-    private class Iterator {
+    @Override
+    public Iterator iterator() {
+        return new Iterator(head);
+    }
 
-        public Iterator(Node list) {
-            head = list;
+    public class Iterator implements java.util.Iterator {
+        Node currentNode;
+
+        Iterator(Node head) {
+            currentNode = head;
         }
 
-        boolean hasNext() {
-            return head.getNext() != null;
+        public boolean hasNext() {
+            return currentNode.getNext() != null;
         }
 
-        String next() {
+        public T next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             } else {
-                return head.getNext().getValue();
+                return (T) currentNode.getNext().getValue();
             }
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
         }
     }
 }
