@@ -1,19 +1,19 @@
 package mylinkedlist;
 
 
-class Node {
-    private String value;
+class Node<T> {
+    private T value;
     private Node next;
 
-    Node(String value) {
+    Node(T value) {
         this.value = value;
     }
 
-    String getValue() {
+    T getValue() {
         return value;
     }
 
-    Node setValue(String value) {
+    Node setValue(T value) {
         this.value = value;
         return this;
     }
