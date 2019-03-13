@@ -3,12 +3,13 @@ package mylinkedlist;
 import org.apache.commons.text.TextStringBuilder;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static java.io.File.separator;
 
 public class MyLinkedList<T> implements Iterable<T> {
-    private Node head;
+    private Node<T> head;
     private int size;
 
     public int size() {
@@ -38,22 +39,22 @@ public class MyLinkedList<T> implements Iterable<T> {
         // if list is empty
         if (isEmpty()) {
             // update first element in list with new parameter
-            this.head = new Node(element);
+            this.head = new Node<>(element);
             // if list is not empty
         } else {
             //update last element in list with new parameter
-            getNode(size - 1).setNext(new Node(element)); //
+            getNode(size - 1).setNext(new Node<>(element)); //
         }
         size++;
         return true;
     }
 
-    private Node getNode(int index) {
+    private Node<T> getNode(int index) {
         if (!isIndexInRange(index)) {
             return null;
         }
         int currentIndex = 0;
-        Node temp = head;
+        Node<T> temp = head;
 
         while (temp != null) {
             if (currentIndex == index) {
@@ -70,7 +71,7 @@ public class MyLinkedList<T> implements Iterable<T> {
         if (!isIndexInRange(index) || isEmpty()) {
             return null;
         }
-        return (T) getNode(index).getValue();
+        return getNode(index).getValue();
     }
 
     public void set(int index, T element) {
@@ -140,27 +141,29 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     @Override
-    public Iterator iterator() {
-        return new Iterator(head);
+    public Iterator<T> iterator() {
+        return new MyIterator(head);
     }
 
-    public class Iterator implements java.util.Iterator {
-        Node currentNode;
+    private class MyIterator implements Iterator<T> {
+        Node<T> currentNode;
 
-        Iterator(Node head) {
+        MyIterator(Node<T> head) {
             currentNode = head;
         }
 
+        @Override
         public boolean hasNext() {
             return currentNode.getNext() != null;
         }
 
+        @Override
         public T next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
-            } else {
-                return (T) currentNode.getNext().getValue();
             }
+            return currentNode.getNext().getValue();
+
         }
 
         @Override

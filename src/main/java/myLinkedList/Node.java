@@ -3,7 +3,7 @@ package mylinkedlist;
 
 class Node<T> {
     private T value;
-    private Node next;
+    private Node<T> next;
 
     Node(T value) {
         this.value = value;
@@ -13,16 +13,16 @@ class Node<T> {
         return value;
     }
 
-    Node setValue(T value) {
+    Node<T> setValue(T value) {
         this.value = value;
         return this;
     }
 
-    Node getNext() {
+    Node<T> getNext() {
         return next;
     }
 
-    void setNext(Node next) {
+    void setNext(Node<T> next) {
         this.next = next;
     }
 
