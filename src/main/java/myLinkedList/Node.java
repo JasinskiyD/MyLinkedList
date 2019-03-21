@@ -1,9 +1,10 @@
 package mylinkedlist;
 
-
 class Node<T> {
     private T value;
     private Node<T> next;
+    private Node<T> prev;
+
 
     Node(T value) {
         this.value = value;
@@ -22,8 +23,17 @@ class Node<T> {
         return next;
     }
 
-    void setNext(Node<T> next) {
+    Node<T> setNext(Node<T> next) {
         this.next = next;
+        return this;
+    }
+
+     Node<T> getPrev() {
+        return prev;
+    }
+
+     void setPrev(Node<T> prev) {
+        this.prev = prev;
     }
 
 }

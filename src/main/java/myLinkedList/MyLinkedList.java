@@ -4,11 +4,14 @@ import org.apache.commons.text.TextStringBuilder;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static java.io.File.separator;
+import static java.util.Objects.isNull;
 
-public class MyLinkedList<T> implements Iterable<T> {
+
+public class MyLinkedList<T> implements Iterable<T>  {
     private Node<T> head;
     private int size;
 
@@ -16,7 +19,7 @@ public class MyLinkedList<T> implements Iterable<T> {
         return size;
     }
 
-    public boolean isEmpty() {
+    public boolean isEmpty()  {
         return head == null;
     }
 
@@ -26,8 +29,9 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     // checks the parameter that method accepts (parameter is the number of the element in the list), returns true if range acceptable and false if not
-    private boolean isIndexInRange(int index) {
-        return 0 <= index && index < size;
+    private void verifyIndexInRange(Integer index) {
+        if (isNull(index) || 0 >= index && index > size)
+            throw new IndexOutOfBoundsException();
     }
 
     // add new element in the end of list, if element is not acceptable return - false, if element added return - true
@@ -43,59 +47,58 @@ public class MyLinkedList<T> implements Iterable<T> {
             // if list is not empty
         } else {
             //update last element in list with new parameter
-            getNode(size - 1).setNext(new Node<>(element)); //
+            getNode(size - 1).setNext(new Node<>(element))
+                    .getNext()
+                    .setPrev(getNode(size - 1));
         }
         size++;
         return true;
     }
 
-    private Node<T> getNode(int index) {
-        if (!isIndexInRange(index)) {
-            return null;
-        }
+    private Node<T> getNode(Integer index) {
+        verifyIndexInRange(index);
+
         int currentIndex = 0;
         Node<T> temp = head;
 
-        while (temp != null) {
-            if (currentIndex == index) {
-                break;
-            } else {
-                currentIndex++;
-                temp = temp.getNext();
-            }
+        while (currentIndex != index) {
+            ++currentIndex;
+            temp = temp.getNext();
         }
         return temp;
     }
 
     public T get(int index) {
-        if (!isIndexInRange(index) || isEmpty()) {
+        if (isEmpty()) {
             return null;
         }
         return getNode(index).getValue();
     }
 
     public void set(int index, T element) {
+        verifyIndexInRange(index);
         getNode(index).setValue(element).setNext(getNode(index + 1));
+        if (getNode(index) != head) getNode(index).setPrev(getNode(index - 1));
     }
 
     public void remove(int index) {
-        if (!isIndexInRange(index)) {
-            return;
-        }
-        Node temp = head;
+        verifyIndexInRange(index);
+
+        Node<T> temp = head;
         if (index == 0) {
             head = head.getNext();
             size--;
             return;
+        } else {
+            getNode(index).setNext(temp.getNext().getNext());
         }
-        getNode(index).setNext(temp.getNext().getNext());
         size--;
     }
 
     @Override
     public String toString() {
         TextStringBuilder string = new TextStringBuilder();
-        Node temp = head;
+        Node<T> temp = head;
 
         while (temp != null) {
             string.appendSeparator(separator).append(temp.getValue());
@@ -105,10 +108,10 @@ public class MyLinkedList<T> implements Iterable<T> {
         return string.toString();
     }
 
-    private ArrayList<Integer> indexList(T element) {
-        ArrayList<Integer> result = new ArrayList<>();
+    private List<Integer> indexList(T element) {
+        List<Integer> result = new ArrayList<>();
 
-        Node temp = head;
+        Node<T> temp = head;
 
         //check every list element
         for (int count = 0; count < size(); count++) {
@@ -132,7 +135,7 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     public int lastIndexOf(T element) {
-        ArrayList<Integer> result = indexList(element);
+        List<Integer> result = indexList(element);
         if (result.size() == 1) {
             return result.get(0);
         } else {

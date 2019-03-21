@@ -57,8 +57,10 @@ public class MyLinkedListTest {
     public void testDeleteElement() {
         MyLinkedList list = new MyLinkedList();
         list.add(WORD);
+        list.add(WORD_2);
+
         list.remove(0);
-        assertTrue(list.isEmpty());
+        assertEquals(WORD_2, list.get(0));
     }
 
     @Test
@@ -141,5 +143,6 @@ public class MyLinkedListTest {
 
         assertEquals(NUM, list.iterator().next());
     }
+
 }
 
