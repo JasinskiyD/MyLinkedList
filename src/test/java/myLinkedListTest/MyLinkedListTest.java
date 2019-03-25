@@ -23,7 +23,7 @@ public class MyLinkedListTest {
 
     @Test
     public void testAddElement() {
-        MyLinkedList list = new MyLinkedList();
+        MyLinkedList<String> list = new MyLinkedList<>();
 
         assertTrue(list.add(WORD));
         assertEquals(1, list.size());
@@ -32,7 +32,7 @@ public class MyLinkedListTest {
 
     @Test
     public void testReadElement() {
-        MyLinkedList list = new MyLinkedList();
+        MyLinkedList<java.io.Serializable> list = new MyLinkedList<>();
         list.add(WORD);
         list.add(NUM);
 
@@ -42,7 +42,7 @@ public class MyLinkedListTest {
 
     @Test
     public void testUpdateElement() {
-        MyLinkedList list = new MyLinkedList();
+        MyLinkedList<java.io.Serializable> list = new MyLinkedList<>();
         list.add(NUM);
         list.add(WORD);
         list.set(0, WORD_2);
@@ -55,7 +55,7 @@ public class MyLinkedListTest {
 
     @Test
     public void testDeleteElement() {
-        MyLinkedList list = new MyLinkedList();
+        MyLinkedList<String> list = new MyLinkedList<String>();
         list.add(WORD);
         list.add(WORD_2);
 
@@ -65,7 +65,7 @@ public class MyLinkedListTest {
 
     @Test
     public void testClearList() {
-        MyLinkedList list = new MyLinkedList();
+        MyLinkedList<java.io.Serializable> list = new MyLinkedList<>();
         list.add(WORD);
         list.add(NUM);
         list.clear();
@@ -79,7 +79,7 @@ public class MyLinkedListTest {
 
     @Test
     public void testGetIndexOfElement(){
-        MyLinkedList list = new MyLinkedList();
+        MyLinkedList<java.io.Serializable> list = new MyLinkedList<>();
         list.add(WORD);
         list.add(WORD_2);
         list.add(NUM);
@@ -91,7 +91,7 @@ public class MyLinkedListTest {
 
     @Test
     public void testGetLastIndexOfElement(){
-        MyLinkedList list = new MyLinkedList();
+        MyLinkedList<java.io.Serializable> list = new MyLinkedList<>();
         list.add(WORD);
         list.add(NUM);
 
@@ -100,7 +100,7 @@ public class MyLinkedListTest {
 
     @Test
     public void testIndexOfElementIfElementIsAbsent(){
-        MyLinkedList list = new MyLinkedList();
+        MyLinkedList<java.io.Serializable> list = new MyLinkedList<>();
         list.add(WORD);
         list.add(NUM);
 
@@ -110,7 +110,7 @@ public class MyLinkedListTest {
 
     @Test
     public void testToStringSeparator(){
-        MyLinkedList list = new MyLinkedList();
+        MyLinkedList<java.io.Serializable> list = new MyLinkedList<>();
         list.add(WORD);
         list.add(NUM);
 
@@ -120,7 +120,7 @@ public class MyLinkedListTest {
 
     @Test
     public void testHasNext(){
-        MyLinkedList list = new MyLinkedList();
+        MyLinkedList<java.io.Serializable> list = new MyLinkedList<>();
         list.add(WORD);
         list.add(NUM);
 
@@ -129,7 +129,7 @@ public class MyLinkedListTest {
 
     @Test
     public void testHasNextIfElementAbsent(){
-        MyLinkedList list = new MyLinkedList();
+        MyLinkedList<String> list = new MyLinkedList<>();
         list.add(WORD);
 
         assertFalse(list.iterator().hasNext());
@@ -137,7 +137,7 @@ public class MyLinkedListTest {
 
     @Test
     public void testNextElement(){
-        MyLinkedList list = new MyLinkedList();
+        MyLinkedList<java.io.Serializable> list = new MyLinkedList<>();
         list.add(WORD);
         list.add(NUM);
 
