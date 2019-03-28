@@ -92,17 +92,18 @@ public class MyLinkedList<T> implements Iterable<T>  {
         if (!isIndexInRange(index))
             return;
 
-        Node<T> nodeToDelete = getNode(index);
-        Node<T> prevTempNode =  nodeToDelete.getPrev();
-        Node<T> afterTempNode =  nodeToDelete.getNext();
+        Node<T> nodeToRemove = getNode(index);
+        Node<T> nodeBeforeNodeToRemove =  nodeToRemove.getPrev();
+        Node<T> nodeAfterNodeToRemove =  nodeToRemove.getNext();
+
         if (index == 0) {
-            head = head.getNext();
+            head = nodeAfterNodeToRemove;
             size--;
             return;
-        } else {
-            prevTempNode.setNext(afterTempNode);
-            afterTempNode.setPrev(prevTempNode);
         }
+
+        nodeBeforeNodeToRemove.setNext(nodeAfterNodeToRemove);
+        nodeAfterNodeToRemove.setPrev(nodeBeforeNodeToRemove);
         size--;
     }
 
