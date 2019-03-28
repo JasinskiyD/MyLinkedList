@@ -34,6 +34,9 @@ public class MyLinkedList<T> implements Iterable<T>  {
 
     // add new element in the end of list, if element is not acceptable return - false, if element added return - true
     public boolean add(T element) {
+        Node<T> currentLastNode = getNode(size - 1);
+        Node<T> newLastNode = new Node<>(element);
+
         // if element is invalid return false
         if (element == null) {
             return false;
@@ -42,29 +45,29 @@ public class MyLinkedList<T> implements Iterable<T>  {
         if (isEmpty()) {
             // update first element in list with new parameter
             this.head = new Node<>(element);
-            this.head.setPrev(null);
             size++;
             return true;
             // if list is not empty
         }
         //update last element in list with new parameter
-        getNode(size - 1).setNext(new Node<>(element));
+        currentLastNode.setNext(newLastNode);
+        newLastNode.setPrev(currentLastNode);
         size++;
-        getNode(size - 1).setPrev(getNode(size - 2));
         return true;
     }
 
     private Node<T> getNode(int index) {
-        if (!isIndexInRange(index)) return null;
+        if (!isIndexInRange(index))
+            return null;
 
         int currentIndex = 0;
-        Node<T> temp = head;
+        Node<T> tempNode = head;
 
         while (currentIndex != index) {
             ++currentIndex;
-            temp = temp.getNext();
+            tempNode = tempNode.getNext();
         }
-        return temp;
+        return tempNode;
     }
 
     public T get(int index) {
@@ -77,22 +80,28 @@ public class MyLinkedList<T> implements Iterable<T>  {
     public void set(int index, T element) {
         Node<T> temp = getNode(index);
 
-        if (!isIndexInRange(index)) return;
+        if (!isIndexInRange(index))
+            return;
+
         temp.setValue(element)
                 .setNext(temp.getNext())
                 .setPrev(temp.getPrev());
     }
 
     public void remove(int index) {
-        if (!isIndexInRange(index)) return;
+        if (!isIndexInRange(index))
+            return;
 
-        Node<T> temp = getNode(index);
+        Node<T> nodeToDelete = getNode(index);
+        Node<T> prevTempNode =  nodeToDelete.getPrev();
+        Node<T> afterTempNode =  nodeToDelete.getNext();
         if (index == 0) {
             head = head.getNext();
             size--;
             return;
         } else {
-            temp.getPrev().setNext(temp.getNext().getNext());
+            prevTempNode.setNext(afterTempNode);
+            afterTempNode.setPrev(prevTempNode);
         }
         size--;
     }
@@ -100,11 +109,11 @@ public class MyLinkedList<T> implements Iterable<T>  {
     @Override
     public String toString() {
         TextStringBuilder string = new TextStringBuilder();
-        Node<T> temp = head;
+        Node<T> tempNode = head;
 
-        while (temp != null) {
-            string.appendSeparator(separator).append(temp.getValue());
-            temp = temp.getNext();
+        while (tempNode != null) {
+            string.appendSeparator(separator).append(tempNode.getValue());
+            tempNode = tempNode.getNext();
         }
 
         return string.toString();
@@ -113,16 +122,16 @@ public class MyLinkedList<T> implements Iterable<T>  {
     private List<Integer> indexList(T element) {
         List<Integer> result = new ArrayList<>();
 
-        Node<T> temp = head;
+        Node<T> tempNode = head;
 
         //check every list element
         for (int count = 0; count < size(); count++) {
             //if element match element in list - add index of element to array list
-            if (element.equals(temp.getValue())) {
+            if (element.equals(tempNode.getValue())) {
                 result.add(count);
             }
             //switch to next element in list
-            temp = temp.getNext();
+            tempNode = tempNode.getNext();
         }
 
         //if list is empty add -1 to array list
