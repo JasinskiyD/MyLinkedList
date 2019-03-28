@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static java.io.File.separator;
-import static java.util.Objects.isNull;
 
 
 public class MyLinkedList<T> implements Iterable<T>  {
@@ -29,9 +28,8 @@ public class MyLinkedList<T> implements Iterable<T>  {
     }
 
     // checks the parameter that method accepts (parameter is the number of the element in the list), returns true if range acceptable and false if not
-    private void verifyIndexInRange(Integer index) {
-        if (isNull(index) || 0 >= index && index > size)
-            throw new IndexOutOfBoundsException();
+    private boolean isIndexInRange(Integer index) {
+        return 0 <= index && index < size;
     }
 
     // add new element in the end of list, if element is not acceptable return - false, if element added return - true
@@ -44,19 +42,20 @@ public class MyLinkedList<T> implements Iterable<T>  {
         if (isEmpty()) {
             // update first element in list with new parameter
             this.head = new Node<>(element);
+            this.head.setPrev(null);
+            size++;
+            return true;
             // if list is not empty
-        } else {
-            //update last element in list with new parameter
-            getNode(size - 1).setNext(new Node<>(element))
-                    .getNext()
-                    .setPrev(getNode(size - 1));
         }
+        //update last element in list with new parameter
+        getNode(size - 1).setNext(new Node<>(element));
         size++;
+        getNode(size - 1).setPrev(getNode(size - 2));
         return true;
     }
 
-    private Node<T> getNode(Integer index) {
-        verifyIndexInRange(index);
+    private Node<T> getNode(int index) {
+        if (!isIndexInRange(index)) return null;
 
         int currentIndex = 0;
         Node<T> temp = head;
@@ -76,21 +75,24 @@ public class MyLinkedList<T> implements Iterable<T>  {
     }
 
     public void set(int index, T element) {
-        verifyIndexInRange(index);
-        getNode(index).setValue(element).setNext(getNode(index + 1));
-        if (getNode(index) != head) getNode(index).setPrev(getNode(index - 1));
+        Node<T> temp = getNode(index);
+
+        if (!isIndexInRange(index)) return;
+        temp.setValue(element)
+                .setNext(temp.getNext())
+                .setPrev(temp.getPrev());
     }
 
     public void remove(int index) {
-        verifyIndexInRange(index);
+        if (!isIndexInRange(index)) return;
 
-        Node<T> temp = head;
+        Node<T> temp = getNode(index);
         if (index == 0) {
             head = head.getNext();
             size--;
             return;
         } else {
-            getNode(index).setNext(temp.getNext().getNext());
+            temp.getPrev().setNext(temp.getNext().getNext());
         }
         size--;
     }
@@ -166,7 +168,6 @@ public class MyLinkedList<T> implements Iterable<T>  {
                 throw new NoSuchElementException();
             }
             return currentNode.getNext().getValue();
-
         }
 
         @Override
