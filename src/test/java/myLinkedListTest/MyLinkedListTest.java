@@ -54,13 +54,39 @@ public class MyLinkedListTest {
     }
 
     @Test
-    public void testDeleteElement() {
+    public void testDeleteFirstElement() {
         MyLinkedList<Object> list = new MyLinkedList<>();
         list.add(WORD);
         list.add(WORD_2);
 
         list.remove(0);
+        assertEquals(1, list.size());
         assertEquals(WORD_2, list.get(0));
+    }
+
+    @Test
+    public void testDeleteInnerElement() {
+        MyLinkedList<Object> list = new MyLinkedList<>();
+        list.add(WORD);
+        list.add(WORD_2);
+        list.add(NUM);
+
+        list.remove(1);
+        assertEquals(2, list.size());
+        assertEquals(NUM, list.get(1));
+    }
+
+    @Test
+    public void testDeleteLastElement() {
+        MyLinkedList<Object> list = new MyLinkedList<>();
+        list.add(WORD);
+        list.add(WORD_2);
+        list.add(NUM);
+        list.add(NUM_2);
+
+        list.remove(3);
+        assertEquals(3, list.size());
+        System.out.println(list.toString());
     }
 
     @Test

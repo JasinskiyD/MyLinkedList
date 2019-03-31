@@ -2,10 +2,7 @@ package mylinkedlist;
 
 import org.apache.commons.text.TextStringBuilder;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import static java.io.File.separator;
 
@@ -98,12 +95,13 @@ public class MyLinkedList<T> implements Iterable<T>  {
 
         if (index == 0) {
             head = nodeAfterNodeToRemove;
-            size--;
-            return;
+            head.setPrev(null);
+        } else if (index == size-1){
+            nodeBeforeNodeToRemove.setNext(null);
+        } else {
+            nodeBeforeNodeToRemove.setNext(nodeAfterNodeToRemove);
+            nodeAfterNodeToRemove.setPrev(nodeBeforeNodeToRemove);
         }
-
-        nodeBeforeNodeToRemove.setNext(nodeAfterNodeToRemove);
-        nodeAfterNodeToRemove.setPrev(nodeBeforeNodeToRemove);
         size--;
     }
 
@@ -160,7 +158,7 @@ public class MyLinkedList<T> implements Iterable<T>  {
         return new MyIterator(head);
     }
 
-    private class MyIterator implements Iterator<T> {
+    private class MyIterator implements ListIterator<T> {
         Node<T> currentNode;
 
         MyIterator(Node<T> head) {
@@ -181,8 +179,42 @@ public class MyLinkedList<T> implements Iterable<T>  {
         }
 
         @Override
+        public boolean hasPrevious() {
+                return currentNode.getPrev() != null;
+        }
+
+        @Override
+        public T previous() {
+            if (!hasPrevious()) {
+                throw new NoSuchElementException();
+            }
+            return currentNode.getPrev().getValue();
+        }
+
+        @Override
+        public int nextIndex() {
+            return indexOf(currentNode.getValue()) + 1;
+        }
+
+        @Override
+        public int previousIndex() {
+            return indexOf(currentNode.getValue()) - 1;
+        }
+
+        @Override
         public void remove() {
             throw new UnsupportedOperationException();
         }
+
+        @Override
+        public void set(T t) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void add(T t) {
+            throw new UnsupportedOperationException();
+        }
+
     }
 }
