@@ -158,6 +158,10 @@ public class MyLinkedList<T> implements Iterable<T>  {
         return new MyIterator(head);
     }
 
+    public ListIterator<T> listIterator() {
+        return new MyIterator(head);
+    }
+
     private class MyIterator implements ListIterator<T> {
         Node<T> currentNode;
 
@@ -173,22 +177,26 @@ public class MyLinkedList<T> implements Iterable<T>  {
         @Override
         public T next() {
             if (!hasNext()) {
-                throw new NoSuchElementException();
+                throw new NullPointerException();
             }
-            return currentNode.getNext().getValue();
+            T value = currentNode.getValue();
+            currentNode = currentNode.getNext();
+            return value;
         }
 
         @Override
         public boolean hasPrevious() {
-                return currentNode.getPrev() != null;
+            return currentNode.getPrev() != null;
         }
 
         @Override
         public T previous() {
             if (!hasPrevious()) {
-                throw new NoSuchElementException();
+                throw new NullPointerException();
             }
-            return currentNode.getPrev().getValue();
+            T value = currentNode.getValue();
+            currentNode = currentNode.getPrev();
+            return value;
         }
 
         @Override

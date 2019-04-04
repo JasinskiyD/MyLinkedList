@@ -154,6 +154,14 @@ public class MyLinkedListTest {
     }
 
     @Test
+    public void testHasPrev(){
+        MyLinkedList<Object> list = new MyLinkedList<>();
+        list.add(WORD);
+
+        assertFalse(list.listIterator().hasPrevious());
+    }
+
+    @Test
     public void testHasNextIfElementAbsent(){
         MyLinkedList<Object> list = new MyLinkedList<>();
         list.add(WORD);
@@ -167,6 +175,7 @@ public class MyLinkedListTest {
         list.add(WORD);
         list.add(NUM);
 
+        assertEquals(WORD, list.iterator().next());
         assertEquals(NUM, list.iterator().next());
     }
 
