@@ -5,6 +5,9 @@ import mylinkedlist.MyLinkedList;
 import org.junit.Test;
 
 
+import java.util.Iterator;
+import java.util.ListIterator;
+
 import static org.junit.Assert.*;
 
 public class MyLinkedListTest {
@@ -86,7 +89,6 @@ public class MyLinkedListTest {
 
         list.remove(3);
         assertEquals(3, list.size());
-        System.out.println(list.toString());
     }
 
     @Test
@@ -98,9 +100,6 @@ public class MyLinkedListTest {
 
         assertEquals(0, list.size());
         assertTrue(list.isEmpty());
-        assertNull(list.get(0));
-        assertEquals(-1, list.indexOf(NUM));
-        assertEquals(-1, list.lastIndexOf(WORD));
     }
 
     @Test
@@ -162,22 +161,32 @@ public class MyLinkedListTest {
     }
 
     @Test
-    public void testHasNextIfElementAbsent(){
-        MyLinkedList<Object> list = new MyLinkedList<>();
-        list.add(WORD);
-
-        assertFalse(list.iterator().hasNext());
-    }
-
-    @Test
     public void testNextElement(){
         MyLinkedList<Object> list = new MyLinkedList<>();
         list.add(WORD);
+        list.add(WORD_2);
         list.add(NUM);
 
-        assertEquals(WORD, list.iterator().next());
-        assertEquals(NUM, list.iterator().next());
+        Iterator<Object> iterator = list.iterator();
+
+        assertEquals(WORD, iterator.next());
+        assertEquals(WORD_2, iterator.next());
+        assertEquals(NUM, iterator.next());
     }
 
+    @Test
+    public void testPrevElement(){
+        MyLinkedList<Object> list = new MyLinkedList<>();
+        list.add(WORD);
+        list.add(WORD_2);
+        list.add(NUM);
+
+        ListIterator<Object> iterator = list.listIterator();
+        iterator.next();
+        iterator.next();
+
+        assertEquals(WORD_2, iterator.previous());
+
+    }
 }
 
