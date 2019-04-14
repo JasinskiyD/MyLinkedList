@@ -108,17 +108,13 @@ public class MyLinkedList<T> implements Iterable<T>  {
 
         Node<T> tempNode = head;
 
-        //check every list element
         for (int count = 0; count < size(); count++) {
-            //if element match element in list - add index of element to array list
             if (element.equals(tempNode.getValue())) {
                 result.add(count);
             }
-            //switch to next element in list
             tempNode = tempNode.getNext();
         }
 
-        //if list is empty add -1 to array list
         if (result.isEmpty()) {
             result.add(-1);
         }
@@ -149,6 +145,8 @@ public class MyLinkedList<T> implements Iterable<T>  {
 
     private class MyIterator implements ListIterator<T> {
         Node<T> currentNode;
+        Node<T> prevNode;
+        int currentIndex = 0;
 
         MyIterator(Node<T> head) {
             currentNode = head;
@@ -165,13 +163,15 @@ public class MyLinkedList<T> implements Iterable<T>  {
                 throw new NoSuchElementException();
             }
             T value = currentNode.getValue();
+            prevNode = currentNode;
             currentNode = currentNode.getNext();
+            currentIndex++;
             return value;
         }
 
         @Override
         public boolean hasPrevious() {
-            return currentNode.getPrev() != null;
+            return  prevNode != null;
         }
 
         @Override
@@ -179,18 +179,21 @@ public class MyLinkedList<T> implements Iterable<T>  {
             if (!hasPrevious()) {
                 throw new NoSuchElementException();
             }
-            currentNode = currentNode.getPrev();
-            return currentNode.getValue();
+            T value = prevNode.getValue();
+            currentNode = prevNode;
+            prevNode = prevNode.getPrev();
+            currentIndex--;
+            return value;
         }
 
         @Override
         public int nextIndex() {
-            return indexOf(currentNode.getValue()) + 1;
+            return currentIndex + 1;
         }
 
         @Override
         public int previousIndex() {
-            return indexOf(currentNode.getValue()) - 1;
+            return currentIndex - 1;
         }
 
         @Override

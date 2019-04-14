@@ -6,6 +6,7 @@ import org.junit.Test;
 
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.ListIterator;
 
 import static org.junit.Assert.*;
@@ -179,14 +180,12 @@ public class MyLinkedListTest {
         MyLinkedList<Object> list = new MyLinkedList<>();
         list.add(WORD);
         list.add(WORD_2);
-        list.add(NUM);
 
         ListIterator<Object> iterator = list.listIterator();
         iterator.next();
         iterator.next();
 
         assertEquals(WORD_2, iterator.previous());
-
     }
 }
 
