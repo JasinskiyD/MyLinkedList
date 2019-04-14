@@ -24,23 +24,17 @@ public class MyLinkedList<T> implements Iterable<T>  {
         size = 0;
     }
 
-    // checks the parameter that method accepts (parameter is the number of the element in the list), returns true if range acceptable and false if not
     private boolean isIndexInRange(int index) {
         return 0 <= index && index < size;
     }
 
-    // add new element in the end of list, if element is not acceptable return - false, if element added return - true
     public boolean add(T element) {
         Node<T> newLastNode = new Node<>(element);
 
-        // if list is empty
         if (isEmpty()) {
-            // update first element in list with new parameter
             this.head = newLastNode;
-            // if list is not empty
         } else {
             Node<T> currentLastNode = getNode(size - 1);
-            //update last element in list with new parameter
             currentLastNode.setNext(newLastNode);
             newLastNode.setPrev(currentLastNode);
         }
