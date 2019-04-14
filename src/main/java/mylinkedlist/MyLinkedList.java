@@ -147,6 +147,7 @@ public class MyLinkedList<T> implements Iterable<T>  {
         Node<T> currentNode;
         Node<T> prevNode;
         int currentIndex = 0;
+        int previousIndex = 0;
 
         MyIterator(Node<T> head) {
             currentNode = head;
@@ -182,18 +183,18 @@ public class MyLinkedList<T> implements Iterable<T>  {
             T value = prevNode.getValue();
             currentNode = prevNode;
             prevNode = prevNode.getPrev();
-            currentIndex--;
+            previousIndex--;
             return value;
         }
 
         @Override
         public int nextIndex() {
-            return currentIndex + 1;
+            return currentIndex;
         }
 
         @Override
         public int previousIndex() {
-            return currentIndex - 1;
+            return previousIndex;
         }
 
         @Override

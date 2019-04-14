@@ -187,5 +187,19 @@ public class MyLinkedListTest {
 
         assertEquals(WORD_2, iterator.previous());
     }
+
+    @Test
+    public void testPrevEelement(){
+        LinkedList<Object> list = new LinkedList<>();
+        list.add(WORD);
+
+
+        ListIterator listIterator = list.listIterator();
+        listIterator.next();
+
+
+        System.out.println(listIterator.nextIndex());
+        System.out.println(listIterator.nextIndex());
+    }
 }
 
