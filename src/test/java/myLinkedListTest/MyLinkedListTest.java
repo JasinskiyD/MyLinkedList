@@ -189,13 +189,25 @@ public class MyLinkedListTest {
     }
 
     @Test
-    public void testPrevEelement(){
-        LinkedList<Object> list = new LinkedList<>();
+    public void testNextPrevIndexForEmptyList(){
+        MyLinkedList<Object> list = new MyLinkedList<>();
 
         ListIterator listIterator = list.listIterator();
 
-        System.out.println(listIterator.nextIndex());
-        System.out.println(listIterator.previousIndex());
+        assertEquals(0, listIterator.nextIndex());
+        assertEquals(-1, listIterator.previousIndex());
+    }
+
+    @Test
+    public void testNextPrevIndex(){
+        MyLinkedList<Object> list = new MyLinkedList<>();
+        list.add(WORD);
+        list.add(WORD_2);
+        ListIterator listIterator = list.listIterator();
+        listIterator.next();
+
+        assertEquals(1, listIterator.nextIndex());
+        assertEquals(0, listIterator.previousIndex());
     }
 }
 

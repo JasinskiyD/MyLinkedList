@@ -166,7 +166,7 @@ public class MyLinkedList<T> implements Iterable<T>  {
             T value = currentNode.getValue();
             prevNode = currentNode;
             currentNode = currentNode.getNext();
-            currentIndex++;
+            prevIndex = currentIndex++;
             return value;
         }
 
@@ -183,7 +183,7 @@ public class MyLinkedList<T> implements Iterable<T>  {
             T value = prevNode.getValue();
             currentNode = prevNode;
             prevNode = prevNode.getPrev();
-            prevIndex--;
+            currentIndex = prevIndex--;
             return value;
         }
 
