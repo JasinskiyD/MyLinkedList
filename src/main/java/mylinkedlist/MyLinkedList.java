@@ -147,7 +147,7 @@ public class MyLinkedList<T> implements Iterable<T>  {
         Node<T> currentNode;
         Node<T> prevNode;
         int currentIndex = 0;
-        int previousIndex = 0;
+        int previousIndex = -1;
 
         MyIterator(Node<T> head) {
             currentNode = head;
